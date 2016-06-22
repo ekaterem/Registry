@@ -1,0 +1,38 @@
+{% extends "templates/style.jinja2" %}
+
+{% block headblock %}
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Личный кабинет: Мои данные</title>
+{% endblock headblock %}
+
+{% block content %}
+<h1> Онлайн-регистратура</h1>
+  <section class="cont" id="center" >
+    <div class="menu">
+		<nav>
+			<ul>
+				<li><a href="aboutme">Мои данные</a></li>
+				<li><a href="registration">Запись к врачу</a></li>
+				<li><a href="history">История приема</a></li>
+			</ul>
+		</nav>
+    </div>
+	<div class="aboutme">
+		<p>ФИО: {{ patient[0] }} {{ patient[1] }} {{ patient[2] }}</p>
+		<p>Номер полиса: {{ patient[3] }}</p>
+		<p>Пол: {% if patient[4]==0 %}
+            ж
+            {% else %}
+            м
+            {% endif %}
+        </p>
+		<p>Номер телефона: {{ patient[5] }}</p>
+		<p>Адрес: {{ patient[6] }}</p>
+		<p>Номер участка: {{ section[0] }}</p>
+	</div>
+	<form method="post" action="login">
+	<p class="submit"><input type="submit" name="commit" value="Выйти"></p>
+  </form>
+  </section>
+{% endblock content %}

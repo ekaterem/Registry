@@ -1,0 +1,64 @@
+{% extends "templates/style.jinja2" %}
+
+{% block headblock %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Личный кабинет: Запись к врачу</title>
+{% endblock headblock %}
+
+{% block content %}
+    <h1> Онлайн-регистратура</h1>
+    <section class="cont" id="center">
+        <div class="menu">
+            <nav>
+                <ul>
+                    <li><a href="aboutme">Мои данные</a></li>
+                    <li><a href="registration">Запись к врачу</a></li>
+                    <li><a href="history">История приема</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="schedule">
+            <h2>Расписание врачей:</h2>
+            <table border="2">
+                <tr>
+                    <th>№</th>
+                    <th>Доктор</th>
+                    <th>Специальность</th>
+                    <th>Участок</th>
+                    <th>Дата</th>
+                    <th>Время</th>
+                </tr>
+                {% for i in schedule[0] %}
+                    <tr>
+                        {% set n= loop.index %}
+                        <td>{{ schedule[0][n-1][0] }}</td>
+                        <td>{{ schedule[3][n-1][0] }} {{ schedule[3][n-1][1] }} {{ schedule[3][n-1][2] }}</td>
+                        <td>{{ schedule[1][n-1] }} </td>
+                        <td>
+                            {% if schedule[2][n-1]!=None %}
+                                {{ schedule[2][n-1] }}
+                            {% else %}
+
+                            {% endif %}
+                        </td>
+                        <td>{{ schedule[0][n-1][2] }}</td>
+                        <td>{{ schedule[0][n-1][3] }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="registry">
+            <form method="post" action="registration">
+                <p><input type="text" name="number" value="" placeholder="Номер записи"></p>
+                <p class="submit"><input type="submit" name="reg" value="Записаться"></p>
+            </form>
+            <!--<p>Для записи позвоните по телефону 88005553535</p>-->
+        </div>
+        <div class ="exit">
+            <form method="post" action="login">
+                <p class="submit"><input type="submit" name="commit" value="Выйти"></p>
+            </form>
+        </div>
+    </section>
+{% endblock content %}

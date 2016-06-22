@@ -1,0 +1,77 @@
+{% extends "templates/style.jinja2" %}
+
+{% block headblock %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Личный кабинет: История посещений</title>
+    <link rel="stylesheet" href="css/style.css">
+{% endblock headblock %}
+
+{% block content %}
+<h1> Онлайн-регистратура</h1>
+<section class="cont" id="center">
+    <div class="menu">
+        <nav>
+            <ul>
+                <li><a href="aboutme">Мои данные</a></li>
+                <li><a href="registration">Запись к врачу</a></li>
+                <li><a href="history">История приема</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="activehistory">
+                <h2>Активные записи:</h2>
+                <table border="2">
+                    <tr>
+                        <th>№</th>
+                        <th>Дата</th>
+                        <th>Специальность</th>
+                    </tr>
+                    {% for i in activeHistory[0] %}
+                        <tr>
+                            {% set n= loop.index %}
+                            <td>{{ activeHistory[0][n-1][0] }}</td>
+                            <td>{{ activeHistory[0][n-1][1] }}</td>
+                            <td>{{ activeHistory[1][n-1] }} </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+    </div>
+    <div class="history">
+        <h2>История приема:</h2>
+        <table border="2">
+            <tr>
+                <th>№</th>
+                <th>Дата</th>
+                <th>Специальность</th>
+                <th>Диагноз</th>
+                <th>Дата окончания больничного</th>
+                <th>Комментарии</th>
+            </tr>
+            {% for i in history[0] %}
+                <tr>
+                    {% set n= loop.index %}
+                    <td>{{ history[0][n-1][0] }}</td>
+                    <td>{{ history[0][n-1][1] }}</td>
+                    <td>{{ history[1][n-1] }} </td>
+                    <td>{{ history[2][n-1] }} </td>
+                    <td>
+                        {% if history[0][n-1][3]!=None %}
+                            {{ history[0][n-1][3]}}
+                        {% else %}
+
+                        {% endif %}</td>
+                    <td>{% if history[0][n-1][4]!=None %}
+                            {{ history[0][n-1][4]}}
+                        {% else %}
+
+                        {% endif %}</td></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+	<form method="post" action="login">
+	<p class="submit"><input type="submit" name="commit" value="Выйти"></p>
+  </form>
+</section>
+{% endblock content %}
