@@ -20,7 +20,7 @@ Base.metadata.bind = engine
 def getUser(login, passw):
     session_factory = get_session_factory(engine)
     dbsession = get_tm_session(session_factory, transaction.manager)
-    query = dbsession.query(Patient).filter(Patient.policy==login and Patient.password==passw)
+    query = dbsession.query(Patient).filter((Patient.policy==login) & (Patient.password==passw))
     try:
         u=query.one()
         return u
